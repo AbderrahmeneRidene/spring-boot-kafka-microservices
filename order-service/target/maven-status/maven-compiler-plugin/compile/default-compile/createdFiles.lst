@@ -1,0 +1,6 @@
+com\example\orderservice\controller\OrderController$OrderRequest.class
+com\example\orderservice\OrderServiceApplication.class
+com\example\orderservice\config\KafkaConfig.class
+com\example\orderservice\controller\OrderController.class
+com\example\orderservice\producer\OrderProducer.class
+com\example\orderservice\event\OrderEvent.class

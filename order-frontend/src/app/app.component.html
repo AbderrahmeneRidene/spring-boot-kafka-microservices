@@ -1,0 +1,60 @@
+<div class="app-container">
+  <div class="glass-panel">
+    <header>
+      <h1>🚀 Kafka Live Orders</h1>
+      <p>Architecture Asynchrone Fullstack</p>
+    </header>
+
+    <div class="content-wrapper">
+      <!-- Formulaire (Producteur) -->
+      <section class="order-form-section">
+        <h2>Créer une commande</h2>
+        <div class="form-group">
+          <label for="customerId">ID Client (Poison pill si vide)</label>
+          <input type="text" id="customerId" [(ngModel)]="customerId" placeholder="Ex: alex_martin" />
+        </div>
+        
+        <div class="form-group">
+          <label for="amount">Montant € (Poison pill si négatif)</label>
+          <input type="number" id="amount" [(ngModel)]="amount" placeholder="99.99" />
+        </div>
+
+        <button class="btn-primary" (click)="submitOrder()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Commander</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+          <span *ngIf="isLoading">Traitement Kafka...</span>
+        </button>
+
+        <div *ngIf="errorMessage" class="alert error-alert">
+          ❌ {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="alert success-alert">
+          {{ successMessage }}
+        </div>
+      </section>
+
+      <!-- Flux d'événements (Consommateur WebSocket) -->
+      <section class="events-section">
+        <h2>📡 Flux en temps réel</h2>
+        <p class="subtitle">En attente des messages STOMP/WebSocket...</p>
+        
+        <div class="events-list">
+          <div *ngIf="recentOrders.length === 0" class="empty-state">
+            Aucune commande reçue pour le moment.
+          </div>
+          
+          <div class="event-card" *ngFor="let order of recentOrders">
+            <div class="event-header">
+              <span class="status-badge">{{ order.status }}</span>
+              <span class="order-id">#{{ order.orderId }}</span>
+            </div>
+            <div class="event-body">
+              <strong>Client:</strong> {{ order.customerId }} <br/>
+              <strong>Montant:</strong> <span class="highlight">{{ order.amount }} €</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

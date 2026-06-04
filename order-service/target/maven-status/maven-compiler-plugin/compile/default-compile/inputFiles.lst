@@ -1,0 +1,5 @@
+C:\Users\abdri\.gemini\antigravity\scratch\spring-boot-kafka-microservices\order-service\src\main\java\com\example\orderservice\OrderServiceApplication.java
+C:\Users\abdri\.gemini\antigravity\scratch\spring-boot-kafka-microservices\order-service\src\main\java\com\example\orderservice\event\OrderEvent.java
+C:\Users\abdri\.gemini\antigravity\scratch\spring-boot-kafka-microservices\order-service\src\main\java\com\example\orderservice\config\KafkaConfig.java
+C:\Users\abdri\.gemini\antigravity\scratch\spring-boot-kafka-microservices\order-service\src\main\java\com\example\orderservice\controller\OrderController.java
+C:\Users\abdri\.gemini\antigravity\scratch\spring-boot-kafka-microservices\order-service\src\main\java\com\example\orderservice\producer\OrderProducer.java

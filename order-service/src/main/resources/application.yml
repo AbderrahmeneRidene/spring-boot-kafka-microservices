@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: order-service
+  
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      # Paramètre de sécurité des écritures (0, 1, ou all/-1)
+      # acks=all garantit que le Leader et toutes ses répliques synchronisées ont bien écrit le message sur le disque.
+      acks: all
+      # Nombre de tentatives de renvoi en cas d'erreur réseau temporaire
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # Utilisation du JsonSerializer de Spring pour envoyer des DTOs
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # Permet d'injecter les informations de type de classe dans les headers pour simplifier la désérialisation
+        spring.json.add.type.headers: true

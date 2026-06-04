@@ -1,0 +1,4 @@
+com\example\notificationservice\event\OrderEvent.class
+com\example\notificationservice\config\WebSocketConfig.class
+com\example\notificationservice\NotificationServiceApplication.class
+com\example\notificationservice\consumer\OrderConsumer.class
