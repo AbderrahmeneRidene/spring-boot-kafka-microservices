@@ -6,6 +6,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.kafka.annotation.DltHandler;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @Service
@@ -48,4 +51,15 @@ public class OrderConsumer {
         log.info("📧 ENVOI D'EMAIL EN COURS à {}: \"Votre commande {} de {}€ a bien été enregistrée !\"", 
                 event.getCustomerId() + "@example.com", event.getOrderId(), event.getAmount());
     }
+
+    @DltHandler
+    public void handleDlt(OrderEvent event, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
+        log.error("❌ Message envoyé à la Dead Letter Queue (DLQ) depuis le topic: {}", topic);
+        event.setStatus("ÉCHEC (DLQ)");
+        
+        // Pousser la notification d'échec vers le Frontend Angular via WebSocket pour débloquer l'UI !
+        messagingTemplate.convertAndSend("/topic/orders", event);
+        log.info("🌐 Message d'échec envoyé au Frontend via WebSocket");
+    }
 }
+
