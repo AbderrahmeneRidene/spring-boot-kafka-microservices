@@ -28,7 +28,7 @@ public class OrderConsumer {
         
         // Simuler une erreur (Poison Pill) si le montant est négatif
         if (event.getAmount() < 0) {
-            throw new RuntimeException("Montant invalide, impossible de traiter !");
+            throw new RuntimeException("Montant invalide, impossible de traiter FROM BACKEND !");
         }
 
         log.info("Détails de la commande : ID={}, Client={}, Montant={}€, Statut={}", 

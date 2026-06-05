@@ -32,7 +32,7 @@ public class OrderController {
                 UUID.randomUUID().toString(),
                 request.getCustomerId(),
                 request.getAmount(),
-                "CRÉÉE"
+                "CREATED"
         );
 
         // Publication de l'événement Kafka
